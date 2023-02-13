@@ -27,11 +27,15 @@ def create_table():
     conn = sqlite3.connect("quiz.db")
     cursor = conn.cursor()
 
+    # Changing database to include likes and dislikes
+     
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS questions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         question TEXT NOT NULL,
-        answer TEXT NOT NULL
+        answer TEXT NOT NULL,
+        likes INTEGER,
+        dislikes INTEGER,
     );
     """)
 

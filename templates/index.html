@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Question and Answer</title>
+  <meta name="description" content="Share your knowledge publicly. Add your very own question and answer to this public table.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    p {
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    th {
+      border: 1px solid #000000;
+      padding: 10px;
+      text-align: left;
+      background-color: #333;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: left;
+    }
+
+    a {
+      padding: 1rem 2rem;
+      background-color: #333;
+      color: white;
+      border: 0;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    a:hover {
+      background-color: #444;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      background-color: #333;
+      color: white;
+      border: 0;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="second"></div>
+  <div class="header">
+    <h1>Question and Answer</h1>
+  </div>
+  <br /><br />
+  <h1>What's this?</h1>
+  <p>
+    On this website, you can share your knowledge publicly. Add your very own question and answer to this public table. Please use this website for educational purposes only. Click the button below to add your Q&A.
+  </p>
+  <div class="container">
+    <a href="{{ url_for('add_question') }}">Add a Question</a>
+  </div>
+  <div class="container">
+    <h2>Submitted questions and their answers are below.</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for question in questions %}
+        <tr>
+          <td>{{ question[1] }}</td>
+          <td>{{ question[2] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <p style="text-align: center">
+    <button type="button" style="
+          color: #ffffff;
+          border: #333 solid 1px;
+          padding: 0.5rem;
+          border-radius: 5px;
+        ">
+      Back to top
+    </button>
+  </p>
+  <script>
+    $("button").click(function () {
+      $("html,body").animate(
+        {
+          scrollTop: $(".second").offset().top,
+        },
+        "slow"
+      );
+    });
+  </script>
+
+  <br /><br /><br />
+  <div class="header">
+    <footer>Coded with ❤️ by Suki</footer>
+  </div>
+</body>
+
+</html>

@@ -75,7 +75,7 @@
       background-color: #444;
     }
 
-    button {
+    .btt {
       padding: 1rem 2rem;
       background-color: #333;
       color: white;
@@ -87,7 +87,7 @@
       text-decoration: none;
     }
 
-    button:hover {
+    .btt:hover {
       background-color: #444;
     }
   </style>
@@ -118,27 +118,34 @@
       </thead>
       <tbody>
         {% for question in questions %}
-        <tr>
-          <td>{{ question[1] }}</td>
-          <td>{{ question[2] }}</td>
-        </tr>
+       <tr>
+  <td>{{ question[1] }}</td>
+  <td>{{ question[2] }}</td>
+  <td>
+    <button id="thumbsUp_{{ loop.index }}">👍</button>
+    <button id="thumbsDown_{{ loop.index }}">👎</button>
+    <p style="display: inline-block; font-size: 12px;">Likes:</p>
+  </td>
+</tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
 
+
+
   <p style="text-align: center">
-    <button type="button" style="
+    <button type="button" id="scroll" style="
           color: #ffffff;
           border: #333 solid 1px;
           padding: 0.5rem;
           border-radius: 5px;
-        ">
+        " class="btt">
       Back to top
     </button>
   </p>
   <script>
-    $("button").click(function () {
+    $("#scroll").click(function () {
       $("html,body").animate(
         {
           scrollTop: $(".second").offset().top,

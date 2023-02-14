@@ -1,10 +1,12 @@
 from gevent import monkey
+
 # Monkey-patching standart Python library for async working
 monkey.patch_all()
+
 # Import WSGI server from Gevent
 from gevent.pywsgi import WSGIServer
-# Import Compress module from Flask-Compress for compress static
-# content (HTML, CSS, JS)
+
+# Import Compress module from Flask-Compress for compress static content (HTML, CSS, JS)
 from flask_compress import Compress
 
 from flask import Flask, render_template, request, redirect
@@ -14,8 +16,10 @@ import requests
 
 app = Flask(__name__)
 
+
 # Create Compress with default params
 compress = Compress()
+
 # Init compress for our Flask app
 compress.init_app(app)
 
@@ -23,11 +27,15 @@ def create_table():
     conn = sqlite3.connect("quiz.db")
     cursor = conn.cursor()
 
+    # Changing database to include likes and dislikes
+     
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS questions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         question TEXT NOT NULL,
-        answer TEXT NOT NULL
+        answer TEXT NOT NULL,
+        likes INTEGER,
+        dislikes INTEGER,
     );
     """)
 
@@ -44,7 +52,8 @@ def index():
 
     conn.close()
 
-    return render_template("index.html", questions=questions)
+    return render_template("index.html", questions=questions)  
+    # cursor = conn.cursor()
 
 @app.route("/add", methods=["GET", "POST"])
 def add_question():

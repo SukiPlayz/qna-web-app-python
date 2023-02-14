@@ -35,7 +35,7 @@ def create_table():
         question TEXT NOT NULL,
         answer TEXT NOT NULL,
         likes INTEGER,
-        dislikes INTEGER,
+        dislikes INTEGER
     );
     """)
 

@@ -122,8 +122,8 @@
   <td>{{ question[1] }}</td>
   <td>{{ question[2] }}</td>
   <td>
-    <button type="button" name="like" id="like_button" onclick="like_dislike.js">&#128077;</button>
-    <button type="button" name="dislike" id="dislike_button" onclick="like_dislike.js">&#128078;</button>
+    <button type="button" name="like" id="like_button">&#128077;</button>
+    <button type="button" name="dislike" id="dislike_button">&#128078;</button>
 
     <!-- Like Dislike js code -->
     <script type="text/javascript">
@@ -138,7 +138,7 @@
         num_likes++;
 
         // Post the modified number of likes to the database
-        
+
         /*
         var xhr = new XMLHttpRequest();
         xhr.open("POST", formURL, true);

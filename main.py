@@ -35,7 +35,7 @@ def create_table():
         question TEXT NOT NULL,
         answer TEXT NOT NULL,
         likes INTEGER,
-        dislikes INTEGER,
+        dislikes INTEGER
     );
     """)
 
@@ -60,11 +60,15 @@ def add_question():
     if request.method == "POST":
         question = request.form["question"].lower()
         answer = request.form["answer"].lower()
-        swear_words = ["arse", "arsehole", "as useful as tits on a bull", "balls", "bastard", "beaver", "beef curtains", "bell", "bellend", "bent", "berk", "bint", "bitch", "blighter", "blimey", "blimey o'reilly", "bloodclaat", "bloody", "bloody hell", "blooming", "bollocks", "bonk", "bugger", "bugger me", "bugger off", "built like a brick shit-house", "bukkake", "bullshit", "cack", "cad", "chav", "cheese eating surrender monkey", "choad", "chuffer", "clunge", "cobblers", "cock", "cock cheese", "cock jockey", "cock-up", "cocksucker", "cockwomble", "codger", "cor blimey", "corey", "cow", "crap", "crikey", "cunt", "daft", "daft cow", "damn", "dick", "dickhead", "did he bollocks!", "did i fuck as like!", "dildo", "dodgy", "duffer", "fanny", "feck", "flaps", "fuck", "fuck me sideways!", "fucking cunt", "fucktard", "gash", "ginger", "git", "gob shite", "goddam", "gorblimey", "gordon bennett", "gormless", "he’s a knob", "hell", "hobknocker", "I'd rather snort my own cum", "jesus christ", "jizz", "knob", "knobber", "knobend", "knobhead", "ligger", "like fucking a dying man's handshake", "mad as a hatter", "manky", "minge", "minger", "minging", "motherfucker", "munter", "muppet", "naff", "nitwit", "nonce", "numpty", "nutter", "off their rocker", "penguin", "pillock", "pish", "piss off", "piss-flaps", "pissed", "pissed off", "play the five-fingered flute", "plonker", "ponce", "poof", "pouf", "poxy", "prat", "prick", "prick", "prickteaser", "punani", "punny", "pussy", "randy", "rapey", "rat arsed", "rotter", "scrubber", "shag", "shit", "shite", "shitfaced", "skank", "slag", "slapper", "slut", "snatch", "sod", "sod-off", "son of a bitch", "spunk", "stick it up your arse!", "swine", "taking the piss", "tits", "toff", "tosser", "trollop", "tuss", "twat", "twonk", "u fukin wanker", "wally", "wanker", "wankstain", "wazzack", "whore"]
 
-        for word in swear_words:
-            if word in question or word in answer:
-                return f"Error: Question or answer contains the word, `{word}` which cannot be used in this website."
+        # Removing the profanity filter from here 
+
+        # swear_words = ["arse", "arsehole", "as useful as tits on a bull", "balls", "bastard", "beaver", "beef curtains", "bell", "bellend", "bent", "berk", "bint", "bitch", "blighter", "blimey", "blimey o'reilly", "bloodclaat", "bloody", "bloody hell", "blooming", "bollocks", "bonk", "bugger", "bugger me", "bugger off", "built like a brick shit-house", "bukkake", "bullshit", "cack", "cad", "chav", "cheese eating surrender monkey", "choad", "chuffer", "clunge", "cobblers", "cock", "cock cheese", "cock jockey", "cock-up", "cocksucker", "cockwomble", "codger", "cor blimey", "corey", "cow", "crap", "crikey", "cunt", "daft", "daft cow", "damn", "dick", "dickhead", "did he bollocks!", "did i fuck as like!", "dildo", "dodgy", "duffer", "fanny", "feck", "flaps", "fuck", "fuck me sideways!", "fucking cunt", "fucktard", "gash", "ginger", "git", "gob shite", "goddam", "gorblimey", "gordon bennett", "gormless", "he’s a knob", "hell", "hobknocker", "I'd rather snort my own cum", "jesus christ", "jizz", "knob", "knobber", "knobend", "knobhead", "ligger", "like fucking a dying man's handshake", "mad as a hatter", "manky", "minge", "minger", "minging", "motherfucker", "munter", "muppet", "naff", "nitwit", "nonce", "numpty", "nutter", "off their rocker", "penguin", "pillock", "pish", "piss off", "piss-flaps", "pissed", "pissed off", "play the five-fingered flute", "plonker", "ponce", "poof", "pouf", "poxy", "prat", "prick", "prick", "prickteaser", "punani", "punny", "pussy", "randy", "rapey", "rat arsed", "rotter", "scrubber", "shag", "shit", "shite", "shitfaced", "skank", "slag", "slapper", "slut", "snatch", "sod", "sod-off", "son of a bitch", "spunk", "stick it up your arse!", "swine", "taking the piss", "tits", "toff", "tosser", "trollop", "tuss", "twat", "twonk", "u fukin wanker", "wally", "wanker", "wankstain", "wazzack", "whore"]
+
+        # for word in swear_words:
+        #     if word in question or word in answer:
+        #         return f"Error: Question or answer contains the word, `{word}` which cannot be used in this website."
+
 
         # Validate reCAPTCHA response
         recaptcha_response = request.form.get("g-recaptcha-response")
@@ -80,7 +84,9 @@ def add_question():
         conn = sqlite3.connect("quiz.db")
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO questions (question, answer) VALUES (?, ?)", (question, answer))
+        cursor.execute("INSERT INTO questions (question, answer, 0, 0) VALUES (?, ?)", (question, answer))
+        # Initializing the number of likes and dislikes to 0
+        # They will incremented whenever the respective buttons are pressed
 
         conn.commit()
         conn.close()

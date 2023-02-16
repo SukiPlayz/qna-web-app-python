@@ -84,7 +84,7 @@ def add_question():
         conn = sqlite3.connect("quiz.db")
         cursor = conn.cursor()
 
-        cursor.execute("INSERT INTO questions (question, answer, 0, 0) VALUES (?, ?)", (question, answer))
+        cursor.execute("INSERT INTO questions (question, answer, likes, dislikes) VALUES (?, ?, 0, 0)", (question, answer))
         # Initializing the number of likes and dislikes to 0
         # They will incremented whenever the respective buttons are pressed
 

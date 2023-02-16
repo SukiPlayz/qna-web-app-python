@@ -122,8 +122,46 @@
   <td>{{ question[1] }}</td>
   <td>{{ question[2] }}</td>
   <td>
-    <button>👍</button>
-    <button>👎</button>
+    <button type="button" name="like" id="like_button">&#128077;</button>
+    <button type="button" name="dislike" id="dislike_button">&#128078;</button>
+
+    <!-- Like Dislike js code -->
+    <script type="text/javascript">
+
+      var like_button = document.getElementById('like_button');
+      var dislike_button = document.getElementById('dislike_button');
+      
+      like_button.onclick = function(){
+        // Get the current number of likes from database
+        var num_likes = document.forms["myForm"]["likes"].value;
+
+        num_likes++;
+
+        // Post the modified number of likes to the database
+
+        /*
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", formURL, true);
+        xhr.setRequestHeader('Accept', 'application/x-www-form-urlencoded; charset=utf-8');
+        xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
+        xhr.send(`likes=${document.forms["myForm"]["likes"].value}`);
+        */     }
+    
+      dislike_button.onclick=function(){
+        // Get the current number of dislikes from database
+        var num_dislikes = document.forms["myForm"]["dislikes"].value;
+
+        num_dislikes++;
+
+        // Post the modified number of likes to the database
+        
+      
+      }     
+      
+      </script>
+
+
+
     <p style="display: inline-block; font-size: 12px;">Likes:</p>
   </td>
 </tr>
